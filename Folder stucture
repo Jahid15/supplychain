@@ -1,0 +1,86 @@
+/supplychain/
+│
+├── assets/
+│   ├── css/
+│   │   └── custom.css         # Your own CSS tweaks, if any
+│   ├── js/
+│   │   └── custom.js          # Custom JS for extra interactivity
+│   ├── images/
+│   └── vendor/
+│       ├── bootstrap/
+│       │   ├── css/
+│       │   │   └── bootstrap.min.css
+│       │   └── js/
+│       │       └── bootstrap.bundle.min.js
+│       └── ...                # Other libraries (jQuery, FontAwesome, etc.)
+│
+├── templates/                 # Reusable HTML layouts
+│   ├── header.php             # Bootstrap navbar, meta, etc.
+│   ├── footer.php             # Bootstrap footer
+│   ├── sidebar.php            # Sidebar for dashboard pages (if needed)
+│   └── modal.php              # Common modal template
+│
+├── includes/
+│   ├── db.php
+│   ├── auth.php
+│   └── functions.php
+│
+├── config/
+│   └── config.php
+│
+├── common/
+│   ├── login.php
+│   ├── logout.php
+│   ├── register.php
+│   └── profile.php
+│
+├── admin/
+│   ├── dashboard.php
+│   ├── users.php
+│   ├── manage_warehouses.php
+│   ├── manage_products.php
+│   ├── manage_batches.php
+│   ├── manage_vehicles.php
+│   ├── manage_drivers.php
+│   ├── manage_employees.php
+│   ├── manage_orders.php
+│   ├── manage_shipments.php
+│   └── reports.php
+│
+├── warehouse_manager/
+│   ├── dashboard.php
+│   ├── inventory.php
+│   ├── employees.php
+│   ├── shipments.php
+│   ├── sensors.php
+│   └── reports.php
+│
+├── warehouse_employee/
+│   ├── dashboard.php
+│   ├── stock.php
+│   ├── batches.php
+│   └── receive_from_farmer.php
+│
+├── transport_manager/
+│   ├── dashboard.php
+│   ├── plan_shipments.php
+│   ├── assign_drivers.php
+│   ├── track_shipments.php
+│   └── vehicles.php
+│
+├── driver/
+│   ├── dashboard.php
+│   ├── my_shipments.php
+│   └── update_status.php
+│
+├── farmer/
+│   ├── dashboard.php
+│   └── my_products.php
+│
+├── customer/
+│   ├── dashboard.php
+│   ├── place_order.php
+│   └── orders.php
+│
+├── index.php
+└── README.md
