@@ -7,58 +7,64 @@ if (!isset($_SESSION['UserID']) || $_SESSION['User_Role'] !== 'customer') {
 include("../includes/db.php");
 include("../templates/header.php");
 
-// Get customer info from users table, and matching CUSTOMER row (if needed)
 $user_id = $_SESSION['UserID'];
-// Find CustomerID from users.Ref_ID (you may have linked them during registration)
 $customer_id = $_SESSION['Ref_ID'] ?? 0;
 
-// Count orders
+// Total Orders Count
 $total_orders = 0;
 if ($customer_id) {
     $total_orders = $pdo->query("SELECT COUNT(*) FROM `ORDER` WHERE Customer_ID = $customer_id")->fetchColumn();
 }
 
-// Get last 5 orders
+// Last 5 Orders
 $orders = [];
 if ($customer_id) {
     $orders = $pdo->query("SELECT * FROM `ORDER` WHERE Customer_ID = $customer_id ORDER BY OrderID DESC LIMIT 5")->fetchAll();
 }
 ?>
 
-<div class="container mt-4">
-    <h2>Welcome, <?= htmlspecialchars($_SESSION['Username']) ?>!</h2>
-    <p>Your Customer Dashboard</p>
+<div style="max-width: 800px; margin: 50px auto; padding: 30px; background-color: rgba(41, 183, 218, 0.1); border-radius: 10px; box-shadow: 0 0 15px rgba(0,0,0,0.08); font-family: Arial, sans-serif;">
 
-    <div class="mb-4">
-        <div class="alert alert-info">Total Orders: <b><?= $total_orders ?></b></div>
+    <h2 style="text-align: center; margin-bottom: 15px;">Welcome, <?= htmlspecialchars($_SESSION['Username']) ?>!</h2>
+    <p style="text-align: center; font-size: 16px; color: #444;">Your Customer Dashboard</p>
+
+    <div style="margin: 25px 0; padding: 12px 20px; background: #d9edf7; border-left: 5px solid #31708f; color: #31708f; font-size: 15px;">
+        Total Orders: <b><?= $total_orders ?></b>
     </div>
 
-    <h4>Recent Orders</h4>
-    <table class="table table-bordered table-striped">
+    <h4 style="margin-bottom: 15px;">Recent Orders</h4>
+    <table style="width: 100%; border-collapse: collapse; margin-bottom: 25px;">
         <thead>
-            <tr>
-                <th>Order ID</th>
-                <th>Date</th>
-                <th>Weight</th>
-                <th>Batch</th>
+            <tr style="background-color: #29b7da; color: white;">
+                <th style="padding: 10px; border: 1px solid #ccc;">Order ID</th>
+                <th style="padding: 10px; border: 1px solid #ccc;">Date</th>
+                <th style="padding: 10px; border: 1px solid #ccc;">Weight</th>
+                <th style="padding: 10px; border: 1px solid #ccc;">Batch</th>
             </tr>
         </thead>
         <tbody>
-        <?php foreach($orders as $o): ?>
-            <tr>
-                <td><?= $o['OrderID'] ?></td>
-                <td><?= $o['Order_date'] ?></td>
-                <td><?= $o['Ordered_weight'] ?></td>
-                <td><?= $o['Batch_ID'] ?></td>
-            </tr>
-        <?php endforeach; ?>
-        <?php if (!$orders): ?>
-            <tr><td colspan="4">No orders found.</td></tr>
-        <?php endif; ?>
+            <?php foreach ($orders as $o): ?>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ccc;"><?= $o['OrderID'] ?></td>
+                    <td style="padding: 10px; border: 1px solid #ccc;"><?= $o['Order_date'] ?></td>
+                    <td style="padding: 10px; border: 1px solid #ccc;"><?= $o['Ordered_weight'] ?></td>
+                    <td style="padding: 10px; border: 1px solid #ccc;"><?= $o['Batch_ID'] ?></td>
+                </tr>
+            <?php endforeach; ?>
+            <?php if (!$orders): ?>
+                <tr>
+                    <td colspan="4" style="padding: 10px; border: 1px solid #ccc; text-align: center;">No orders found.</td>
+                </tr>
+            <?php endif; ?>
         </tbody>
     </table>
 
-    <a href="place_order.php" class="btn btn-success">Place New Order</a>
-    <a href="orders.php" class="btn btn-primary">View All Orders</a>
+    <div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px;">
+        <a href="place_order.php" style="padding: 10px 20px; background-color: #5cb85c; color: white; text-decoration: none; border-radius: 5px;">Place New Order</a>
+        <a href="orders.php" style="padding: 10px 20px; background-color: #29b7da; color: white; text-decoration: none; border-radius: 5px;">View All Orders</a>
+        <a href="../common/logout.php" style="padding: 10px 20px; background-color: #dc3545; color: white; text-decoration: none; border-radius: 5px;">Logout</a>
+    </div>
+
 </div>
+
 <?php include("../templates/footer.php"); ?>
